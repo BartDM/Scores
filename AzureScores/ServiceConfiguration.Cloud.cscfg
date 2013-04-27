@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="AzureScores" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="2" osVersion="*" schemaVersion="2012-10.1.8">
+  <Role name="FetchScores">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=portalvhdskzwb0l6fx8fhf;AccountKey=jIOmBcJUweWtwRrj8Ia5Wp0aYbHm8BeIrYcgblIRfdIKppAzFqw/TOUpTeSWqzSrvzh5qGQ2fxhQYAY9a16ZfA==" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="bart.de.meyer" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEDa1VKE+H4WmS+8l5Rw30OswDQYJKoZIhvcNAQEBBQAEggEAekT+22kzaNH4JExrGCra41oadpztL1hqlgWuj4ZIPChQ1Mo6hD1UUcpjJbooMJLxRboCxMcL/L9wT0DVrwtNG7GSc03UzYNzpvxnnnF6vFzNeZlntNoFKzY1fsYFHVwhaEKyR9siQ23IQr3HByMLAA7MIrfG1KesXWD8yVhfp2fU645aWq+OUUriIWO/nfLe5o8YJu89qhdZq5hq5YDvir+l2+JRt/nzqfsBUBe/YqvHqTxStPrm/qvEVrfPWBU2TI3KxYTJb4kssDKVdtkTD4/6piTDmm/Ad6xtIOu9w+r31+DqVHr33QyLn3MKhvkNXnspPPpyHNPx3yZjKlzQCzAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECGRNRXmuXN5tgBA6HMQ5CuNg8gv9PqkEZ6PK" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2014-05-04T23:59:59.0000000+02:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="7FA6124184C4704127A093E5A0601D442FA19FB4" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>

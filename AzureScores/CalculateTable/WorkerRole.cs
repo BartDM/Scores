@@ -1,32 +1,27 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Threading;
+using Microsoft.WindowsAzure;
+using Microsoft.WindowsAzure.Diagnostics;
 using Microsoft.WindowsAzure.ServiceRuntime;
+using Microsoft.WindowsAzure.StorageClient;
 
-namespace WorkerRole1
+namespace CalculateTable
 {
-    public class FetchScoresWorkerRole : RoleEntryPoint
+    public class WorkerRole : RoleEntryPoint
     {
-        private Fetcher fetcher;
-
-
-        public FetchScoresWorkerRole()
-        {
-            fetcher = new Fetcher();
-        }
-
         public override void Run()
         {
             // This is a sample worker implementation. Replace with your logic.
-            Trace.WriteLine("WorkerRole1 entry point called", "Information");
+            Trace.WriteLine("CalculateTable entry point called", "Information");
 
             while (true)
             {
-                Trace.WriteLine("Working", "Going to fetch the scores -> Test method");
-                fetcher.LoadGamesForAllDivisions();
-                Trace.WriteLine("Working","All games loaded");
-                Thread.Sleep(TimeSpan.FromSeconds(30));
+                Thread.Sleep(10000);
+                Trace.WriteLine("Working", "Information");
             }
         }
 

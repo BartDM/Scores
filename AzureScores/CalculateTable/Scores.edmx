@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ScoresModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ScoresModelStoreContainer">
+          <EntitySet Name="Divisions" EntityType="ScoresModel.Store.Divisions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="games" EntityType="ScoresModel.Store.games" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Seasons" EntityType="ScoresModel.Store.Seasons" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TableLines" EntityType="ScoresModel.Store.TableLines" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Tables" EntityType="ScoresModel.Store.Tables" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Teams" EntityType="ScoresModel.Store.Teams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TeamSeasonDivision" EntityType="ScoresModel.Store.TeamSeasonDivision" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Game_Division" Association="ScoresModel.Store.FK_Game_Division">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Season" Association="ScoresModel.Store.FK_Game_Season">
+            <End Role="Seasons" EntitySet="Seasons" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Team1" Association="ScoresModel.Store.FK_Game_Team1">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Team2" Association="ScoresModel.Store.FK_Game_Team2">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tables_Divisions" Association="ScoresModel.Store.FK_Tables_Divisions">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tables_Seasons" Association="ScoresModel.Store.FK_Tables_Seasons">
+            <End Role="Seasons" EntitySet="Seasons" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamSeasonDivision_Division" Association="ScoresModel.Store.FK_TeamSeasonDivision_Division">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="TeamSeasonDivision" EntitySet="TeamSeasonDivision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamSeasonDivision_Season" Association="ScoresModel.Store.FK_TeamSeasonDivision_Season">
+            <End Role="Seasons" EntitySet="Seasons" />
+            <End Role="TeamSeasonDivision" EntitySet="TeamSeasonDivision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamSeasonDivision_Team" Association="ScoresModel.Store.FK_TeamSeasonDivision_Team">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="TeamSeasonDivision" EntitySet="TeamSeasonDivision" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Divisions">
+          <Key>
+            <PropertyRef Name="DivisionId" />
+          </Key>
+          <Property Name="DivisionId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="games">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SeasonId" Type="bigint" Nullable="false" />
+          <Property Name="Divisionid" Type="bigint" Nullable="false" />
+          <Property Name="GameNumber" Type="varchar" MaxLength="10" />
+          <Property Name="Team1Id" Type="bigint" Nullable="false" />
+          <Property Name="Team1Score" Type="int" />
+          <Property Name="Team1Tries" Type="int" />
+          <Property Name="Team2Id" Type="bigint" Nullable="false" />
+          <Property Name="Team2Score" Type="int" />
+          <Property Name="Team2Tries" Type="int" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Seasons">
+          <Key>
+            <PropertyRef Name="SeasonId" />
+          </Key>
+          <Property Name="SeasonId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="StartYear" Type="int" Nullable="false" />
+          <Property Name="EndYear" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TableLines">
+          <Key>
+            <PropertyRef Name="TableLineId" />
+          </Key>
+          <Property Name="TableLineId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TableId" Type="bigint" Nullable="false" />
+          <Property Name="TeamId" Type="bigint" Nullable="false" />
+          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="Bonus" Type="int" Nullable="false" />
+          <Property Name="TotalPoints" Type="int" Nullable="false" />
+          <Property Name="Games" Type="int" Nullable="false" />
+          <Property Name="Won" Type="int" Nullable="false" />
+          <Property Name="Draw" Type="int" Nullable="false" />
+          <Property Name="Lost" Type="int" Nullable="false" />
+          <Property Name="Forfait" Type="int" Nullable="false" />
+          <Property Name="PositivePoints" Type="int" Nullable="false" />
+          <Property Name="NegativePoints" Type="int" Nullable="false" />
+          <Property Name="RedCards" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tables">
+          <Key>
+            <PropertyRef Name="TableId" />
+          </Key>
+          <Property Name="TableId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="DivisionId" Type="bigint" Nullable="false" />
+          <Property Name="SeasonId" Type="bigint" Nullable="false" />
+          <Property Name="SelfCalculated" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Team" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TeamSeasonDivision">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="TeamId" Type="bigint" Nullable="false" />
+          <Property Name="DivisionId" Type="bigint" Nullable="false" />
+          <Property Name="SeasonId" Type="bigint" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <Association Name="FK_Game_Division">
+          <End Role="Divisions" Type="ScoresModel.Store.Divisions" Multiplicity="1" />
+          <End Role="games" Type="ScoresModel.Store.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="DivisionId" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="Divisionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Season">
+          <End Role="Seasons" Type="ScoresModel.Store.Seasons" Multiplicity="1" />
+          <End Role="games" Type="ScoresModel.Store.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seasons">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Team1">
+          <End Role="Teams" Type="ScoresModel.Store.Teams" Multiplicity="1" />
+          <End Role="games" Type="ScoresModel.Store.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="Team1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Team2">
+          <End Role="Teams" Type="ScoresModel.Store.Teams" Multiplicity="1" />
+          <End Role="games" Type="ScoresModel.Store.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="Team2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tables_Divisions">
+          <End Role="Divisions" Type="ScoresModel.Store.Divisions" Multiplicity="1" />
+          <End Role="Tables" Type="ScoresModel.Store.Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="DivisionId" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="DivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tables_Seasons">
+          <End Role="Seasons" Type="ScoresModel.Store.Seasons" Multiplicity="1" />
+          <End Role="Tables" Type="ScoresModel.Store.Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seasons">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamSeasonDivision_Division">
+          <End Role="Divisions" Type="ScoresModel.Store.Divisions" Multiplicity="1" />
+          <End Role="TeamSeasonDivision" Type="ScoresModel.Store.TeamSeasonDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="DivisionId" />
+            </Principal>
+            <Dependent Role="TeamSeasonDivision">
+              <PropertyRef Name="DivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamSeasonDivision_Season">
+          <End Role="Seasons" Type="ScoresModel.Store.Seasons" Multiplicity="1" />
+          <End Role="TeamSeasonDivision" Type="ScoresModel.Store.TeamSeasonDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seasons">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="TeamSeasonDivision">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamSeasonDivision_Team">
+          <End Role="Teams" Type="ScoresModel.Store.Teams" Multiplicity="1" />
+          <End Role="TeamSeasonDivision" Type="ScoresModel.Store.TeamSeasonDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="TeamSeasonDivision">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ScoresModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ScoresEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Divisions" EntityType="ScoresModel.Divisions" />
+          <EntitySet Name="games" EntityType="ScoresModel.games" />
+          <EntitySet Name="Seasons" EntityType="ScoresModel.Seasons" />
+          <EntitySet Name="TableLines" EntityType="ScoresModel.TableLines" />
+          <EntitySet Name="Tables" EntityType="ScoresModel.Tables" />
+          <EntitySet Name="Teams" EntityType="ScoresModel.Teams" />
+          <EntitySet Name="TeamSeasonDivision" EntityType="ScoresModel.TeamSeasonDivision" />
+          <AssociationSet Name="FK_Game_Division" Association="ScoresModel.FK_Game_Division">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tables_Divisions" Association="ScoresModel.FK_Tables_Divisions">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamSeasonDivision_Division" Association="ScoresModel.FK_TeamSeasonDivision_Division">
+            <End Role="Divisions" EntitySet="Divisions" />
+            <End Role="TeamSeasonDivision" EntitySet="TeamSeasonDivision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Season" Association="ScoresModel.FK_Game_Season">
+            <End Role="Seasons" EntitySet="Seasons" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Team1" Association="ScoresModel.FK_Game_Team1">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Game_Team2" Association="ScoresModel.FK_Game_Team2">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="games" EntitySet="games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tables_Seasons" Association="ScoresModel.FK_Tables_Seasons">
+            <End Role="Seasons" EntitySet="Seasons" />
+            <End Role="Tables" EntitySet="Tables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamSeasonDivision_Season" Association="ScoresModel.FK_TeamSeasonDivision_Season">
+            <End Role="Seasons" EntitySet="Seasons" />
+            <End Role="TeamSeasonDivision" EntitySet="TeamSeasonDivision" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TeamSeasonDivision_Team" Association="ScoresModel.FK_TeamSeasonDivision_Team">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="TeamSeasonDivision" EntitySet="TeamSeasonDivision" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Divisions">
+          <Key>
+            <PropertyRef Name="DivisionId" />
+          </Key>
+          <Property Name="DivisionId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="games" Relationship="ScoresModel.FK_Game_Division" FromRole="Divisions" ToRole="games" />
+          <NavigationProperty Name="Tables" Relationship="ScoresModel.FK_Tables_Divisions" FromRole="Divisions" ToRole="Tables" />
+          <NavigationProperty Name="TeamSeasonDivision" Relationship="ScoresModel.FK_TeamSeasonDivision_Division" FromRole="Divisions" ToRole="TeamSeasonDivision" />
+        </EntityType>
+        <EntityType Name="games">
+          <Key>
+            <PropertyRef Name="GameId" />
+          </Key>
+          <Property Name="GameId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SeasonId" Type="Int64" Nullable="false" />
+          <Property Name="Divisionid" Type="Int64" Nullable="false" />
+          <Property Name="GameNumber" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Team1Id" Type="Int64" Nullable="false" />
+          <Property Name="Team1Score" Type="Int32" />
+          <Property Name="Team1Tries" Type="Int32" />
+          <Property Name="Team2Id" Type="Int64" Nullable="false" />
+          <Property Name="Team2Score" Type="Int32" />
+          <Property Name="Team2Tries" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Divisions" Relationship="ScoresModel.FK_Game_Division" FromRole="games" ToRole="Divisions" />
+          <NavigationProperty Name="Seasons" Relationship="ScoresModel.FK_Game_Season" FromRole="games" ToRole="Seasons" />
+          <NavigationProperty Name="Teams" Relationship="ScoresModel.FK_Game_Team1" FromRole="games" ToRole="Teams" />
+          <NavigationProperty Name="Teams1" Relationship="ScoresModel.FK_Game_Team2" FromRole="games" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="Seasons">
+          <Key>
+            <PropertyRef Name="SeasonId" />
+          </Key>
+          <Property Name="SeasonId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="StartYear" Type="Int32" Nullable="false" />
+          <Property Name="EndYear" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="games" Relationship="ScoresModel.FK_Game_Season" FromRole="Seasons" ToRole="games" />
+          <NavigationProperty Name="Tables" Relationship="ScoresModel.FK_Tables_Seasons" FromRole="Seasons" ToRole="Tables" />
+          <NavigationProperty Name="TeamSeasonDivision" Relationship="ScoresModel.FK_TeamSeasonDivision_Season" FromRole="Seasons" ToRole="TeamSeasonDivision" />
+        </EntityType>
+        <EntityType Name="TableLines">
+          <Key>
+            <PropertyRef Name="TableLineId" />
+          </Key>
+          <Property Name="TableLineId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableId" Type="Int64" Nullable="false" />
+          <Property Name="TeamId" Type="Int64" Nullable="false" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <Property Name="Bonus" Type="Int32" Nullable="false" />
+          <Property Name="TotalPoints" Type="Int32" Nullable="false" />
+          <Property Name="Games" Type="Int32" Nullable="false" />
+          <Property Name="Won" Type="Int32" Nullable="false" />
+          <Property Name="Draw" Type="Int32" Nullable="false" />
+          <Property Name="Lost" Type="Int32" Nullable="false" />
+          <Property Name="Forfait" Type="Int32" Nullable="false" />
+          <Property Name="PositivePoints" Type="Int32" Nullable="false" />
+          <Property Name="NegativePoints" Type="Int32" Nullable="false" />
+          <Property Name="RedCards" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tables">
+          <Key>
+            <PropertyRef Name="TableId" />
+          </Key>
+          <Property Name="TableId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DivisionId" Type="Int64" Nullable="false" />
+          <Property Name="SeasonId" Type="Int64" Nullable="false" />
+          <Property Name="SelfCalculated" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Divisions" Relationship="ScoresModel.FK_Tables_Divisions" FromRole="Tables" ToRole="Divisions" />
+          <NavigationProperty Name="Seasons" Relationship="ScoresModel.FK_Tables_Seasons" FromRole="Tables" ToRole="Seasons" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="TeamId" />
+          </Key>
+          <Property Name="TeamId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Team" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="games" Relationship="ScoresModel.FK_Game_Team1" FromRole="Teams" ToRole="games" />
+          <NavigationProperty Name="games1" Relationship="ScoresModel.FK_Game_Team2" FromRole="Teams" ToRole="games" />
+          <NavigationProperty Name="TeamSeasonDivision" Relationship="ScoresModel.FK_TeamSeasonDivision_Team" FromRole="Teams" ToRole="TeamSeasonDivision" />
+        </EntityType>
+        <EntityType Name="TeamSeasonDivision">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="TeamId" Type="Int64" Nullable="false" />
+          <Property Name="DivisionId" Type="Int64" Nullable="false" />
+          <Property Name="SeasonId" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Divisions" Relationship="ScoresModel.FK_TeamSeasonDivision_Division" FromRole="TeamSeasonDivision" ToRole="Divisions" />
+          <NavigationProperty Name="Seasons" Relationship="ScoresModel.FK_TeamSeasonDivision_Season" FromRole="TeamSeasonDivision" ToRole="Seasons" />
+          <NavigationProperty Name="Teams" Relationship="ScoresModel.FK_TeamSeasonDivision_Team" FromRole="TeamSeasonDivision" ToRole="Teams" />
+        </EntityType>
+        <Association Name="FK_Game_Division">
+          <End Role="Divisions" Type="ScoresModel.Divisions" Multiplicity="1" />
+          <End Role="games" Type="ScoresModel.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="DivisionId" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="Divisionid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tables_Divisions">
+          <End Role="Divisions" Type="ScoresModel.Divisions" Multiplicity="1" />
+          <End Role="Tables" Type="ScoresModel.Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="DivisionId" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="DivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamSeasonDivision_Division">
+          <End Role="Divisions" Type="ScoresModel.Divisions" Multiplicity="1" />
+          <End Role="TeamSeasonDivision" Type="ScoresModel.TeamSeasonDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Divisions">
+              <PropertyRef Name="DivisionId" />
+            </Principal>
+            <Dependent Role="TeamSeasonDivision">
+              <PropertyRef Name="DivisionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Season">
+          <End Role="Seasons" Type="ScoresModel.Seasons" Multiplicity="1" />
+          <End Role="games" Type="ScoresModel.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seasons">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Team1">
+          <End Role="Teams" Type="ScoresModel.Teams" Multiplicity="1" />
+          <End Role="games" Type="ScoresModel.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="Team1Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Game_Team2">
+          <End Role="Teams" Type="ScoresModel.Teams" Multiplicity="1" />
+          <End Role="games" Type="ScoresModel.games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="games">
+              <PropertyRef Name="Team2Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tables_Seasons">
+          <End Role="Seasons" Type="ScoresModel.Seasons" Multiplicity="1" />
+          <End Role="Tables" Type="ScoresModel.Tables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seasons">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="Tables">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamSeasonDivision_Season">
+          <End Role="Seasons" Type="ScoresModel.Seasons" Multiplicity="1" />
+          <End Role="TeamSeasonDivision" Type="ScoresModel.TeamSeasonDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seasons">
+              <PropertyRef Name="SeasonId" />
+            </Principal>
+            <Dependent Role="TeamSeasonDivision">
+              <PropertyRef Name="SeasonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TeamSeasonDivision_Team">
+          <End Role="Teams" Type="ScoresModel.Teams" Multiplicity="1" />
+          <End Role="TeamSeasonDivision" Type="ScoresModel.TeamSeasonDivision" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamId" />
+            </Principal>
+            <Dependent Role="TeamSeasonDivision">
+              <PropertyRef Name="TeamId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ScoresModelStoreContainer" CdmEntityContainer="ScoresEntities">
+          <EntitySetMapping Name="Divisions">
+            <EntityTypeMapping TypeName="ScoresModel.Divisions">
+              <MappingFragment StoreEntitySet="Divisions">
+                <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="games">
+            <EntityTypeMapping TypeName="ScoresModel.games">
+              <MappingFragment StoreEntitySet="games">
+                <ScalarProperty Name="GameId" ColumnName="GameId" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="Divisionid" ColumnName="Divisionid" />
+                <ScalarProperty Name="GameNumber" ColumnName="GameNumber" />
+                <ScalarProperty Name="Team1Id" ColumnName="Team1Id" />
+                <ScalarProperty Name="Team1Score" ColumnName="Team1Score" />
+                <ScalarProperty Name="Team1Tries" ColumnName="Team1Tries" />
+                <ScalarProperty Name="Team2Id" ColumnName="Team2Id" />
+                <ScalarProperty Name="Team2Score" ColumnName="Team2Score" />
+                <ScalarProperty Name="Team2Tries" ColumnName="Team2Tries" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seasons">
+            <EntityTypeMapping TypeName="ScoresModel.Seasons">
+              <MappingFragment StoreEntitySet="Seasons">
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="StartYear" ColumnName="StartYear" />
+                <ScalarProperty Name="EndYear" ColumnName="EndYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TableLines">
+            <EntityTypeMapping TypeName="ScoresModel.TableLines">
+              <MappingFragment StoreEntitySet="TableLines">
+                <ScalarProperty Name="TableLineId" ColumnName="TableLineId" />
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Bonus" ColumnName="Bonus" />
+                <ScalarProperty Name="TotalPoints" ColumnName="TotalPoints" />
+                <ScalarProperty Name="Games" ColumnName="Games" />
+                <ScalarProperty Name="Won" ColumnName="Won" />
+                <ScalarProperty Name="Draw" ColumnName="Draw" />
+                <ScalarProperty Name="Lost" ColumnName="Lost" />
+                <ScalarProperty Name="Forfait" ColumnName="Forfait" />
+                <ScalarProperty Name="PositivePoints" ColumnName="PositivePoints" />
+                <ScalarProperty Name="NegativePoints" ColumnName="NegativePoints" />
+                <ScalarProperty Name="RedCards" ColumnName="RedCards" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tables">
+            <EntityTypeMapping TypeName="ScoresModel.Tables">
+              <MappingFragment StoreEntitySet="Tables">
+                <ScalarProperty Name="TableId" ColumnName="TableId" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="SelfCalculated" ColumnName="SelfCalculated" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="ScoresModel.Teams">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="Team" ColumnName="Team" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamSeasonDivision">
+            <EntityTypeMapping TypeName="ScoresModel.TeamSeasonDivision">
+              <MappingFragment StoreEntitySet="TeamSeasonDivision">
+                <ScalarProperty Name="TeamId" ColumnName="TeamId" />
+                <ScalarProperty Name="DivisionId" ColumnName="DivisionId" />
+                <ScalarProperty Name="SeasonId" ColumnName="SeasonId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

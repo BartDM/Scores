@@ -179,8 +179,22 @@ namespace WorkerRole1
             if (scoreNode != null && !string.IsNullOrEmpty(scoreNode.InnerText.CleanHtml().Trim()))
             {
                 string[] scores = scoreNode.InnerText.CleanHtml().Trim().Split('-');
-                int.TryParse(scores[0].Trim(), out team1Score);
-                int.TryParse(scores[1].Trim(), out team2Score);
+                if (!int.TryParse(scores[0].Trim(), out team1Score))
+                {
+                    //Check for FF
+                    if (scores[0].Trim().Equals("FF", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        team1Score = -1;
+                    }
+                }
+                if (!int.TryParse(scores[1].Trim(), out team2Score))
+                {
+                    //Check for FF
+                    if (scores[1].Trim().Equals("FF", StringComparison.InvariantCultureIgnoreCase))
+                    {
+                        team2Score = -1;
+                    }
+                }
             }
             game.Team1Score = team1Score;
             game.Team2Score = team2Score;

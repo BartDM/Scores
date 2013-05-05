@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <AzureCredentials>Windows Azure  MSDN - Visual Studio Premium</AzureCredentials>
-    <AzureDeleteDeploymentOnFailure>False</AzureDeleteDeploymentOnFailure>
+    <AzureDeleteDeploymentOnFailure>True</AzureDeleteDeploymentOnFailure>
     <AzureDeploymentLabel>AzureScores</AzureDeploymentLabel>
     <AzureDeploymentReplacementMethod>AutomaticUpgrade</AzureDeploymentReplacementMethod>
     <AzureSlot>Staging</AzureSlot>
@@ -12,9 +12,9 @@
     <AzureHostedServiceLabel>ScoresBartDeMeyer</AzureHostedServiceLabel>
     <AzureHostedServiceName>ScoresBartDeMeyer</AzureHostedServiceName>
     <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
-    <AzureEnableProfiling>False</AzureEnableProfiling>
+    <AzureEnableProfiling>True</AzureEnableProfiling>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
-    <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
+    <AzureSolutionConfiguration>Debug</AzureSolutionConfiguration>
     <AzureStorageAccountLabel>portalvhdskzwb0l6fx8fhf</AzureStorageAccountLabel>
     <AzureStorageAccountName>portalvhdskzwb0l6fx8fhf</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>
